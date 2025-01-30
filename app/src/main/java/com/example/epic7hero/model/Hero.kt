@@ -10,6 +10,7 @@ data class Hero(
     val portraitImage : String,
     val rarity : String,
     val classes : String,
+    val zodiac : String,
     val heroStats : Stats,
     val skills : List<Skill>,
 )
