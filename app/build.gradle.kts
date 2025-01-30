@@ -60,5 +60,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Navigation Compose
     implementation(libs.androidx.navigation.compose)
-
+    // Load Data With Kotlin Coroutine in Compose
+    implementation(libs.coil.compose)
 }
