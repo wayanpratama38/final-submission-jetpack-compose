@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -30,6 +31,14 @@ class HeroRepository {
                 heroes.filter{ hero->
                     hero.isFavorite
                 }
+        }
+    }
+
+    fun getHeroById(id : Long):Hero{
+        return heroesData.value.let {
+            heroesList -> heroesList.first {
+                it.id==id
+            }
         }
     }
 
