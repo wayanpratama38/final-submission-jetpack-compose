@@ -30,6 +30,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.epic7hero.ui.navigation.BottomBarItem
 import com.example.epic7hero.ui.navigation.Screen
+import com.example.epic7hero.ui.screen.favorite.Favorite
 import com.example.epic7hero.ui.screen.home.Home
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
 
@@ -111,6 +112,11 @@ fun EpicSevenApp(
         ){
             composable(Screen.Home.route){
                 Home(navigateToDetail ={ id->
+                    navController.navigate(Screen.DetailHero.createRoute(id))
+                })
+            }
+            composable(Screen.Favorite.route){
+                Favorite(navigateToDetail = {id->
                     navController.navigate(Screen.DetailHero.createRoute(id))
                 })
             }
