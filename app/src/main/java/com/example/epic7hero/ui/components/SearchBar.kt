@@ -17,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.epic7hero.R
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,7 +49,7 @@ fun SearchBar(
             )
         },
         placeholder = {
-            Text("Search Bar")
+            Text(stringResource(R.string.search_bar_placeholder))
         },
         shape = MaterialTheme.shapes.large,
         modifier = modifier
