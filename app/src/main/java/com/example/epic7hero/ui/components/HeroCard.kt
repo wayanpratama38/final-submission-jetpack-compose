@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Icon
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,12 +35,15 @@ import com.example.epic7hero.R
 
 @Composable
 fun HeroCard(
+    id : Long,
     name : String,
     profileImage : String,
     element : String,
     rarity : String,
     classes : String,
     zodiac : String,
+    isFavorite : Boolean,
+    onFavoriteClick : (id: Long,newState : Boolean) -> Unit,
     modifier: Modifier = Modifier
 ){
     Box(
@@ -115,11 +120,16 @@ fun HeroCard(
             }
 
             Icon(
-                imageVector = Icons.Outlined.FavoriteBorder,
+                imageVector = if (!isFavorite) Icons.Outlined.FavoriteBorder else Icons.Outlined.Favorite,
                 contentDescription = null,
+                tint = if(!isFavorite) Color.Black else Color.Red,
                 modifier = Modifier
+                    .clickable {
+                        onFavoriteClick(id,!isFavorite)
+                    }
                     .size(32.dp)
                     .align(Alignment.CenterVertically)
+                    .padding(end=8.dp)
             )
 
         }
@@ -132,11 +142,14 @@ fun HeroCard(
 @Preview(showBackground = true, device = Devices.PIXEL_4)
 fun HeroCardPreview(){
     HeroCard(
+        id = 1,
         name = "Abigail",
         profileImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/abigail/profile/abigail.png",
         element = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ElementImages/Fire-circle.png",
         rarity = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroeRarityImages/5star.png",
         classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/warrior.png",
         zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/aries.png",
+        isFavorite = false,
+        onFavoriteClick = {id,newState->}
     )
 }

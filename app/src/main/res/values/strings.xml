@@ -3,4 +3,5 @@
     <string name="home_bottom_name">Home</string>
     <string name="favorite_bottom_name">Favorite</string>
     <string name="profile_bottom_name">Profile</string>
+    <string name="hero_not_found">Hero tidak ditemukan!</string>
 </resources>

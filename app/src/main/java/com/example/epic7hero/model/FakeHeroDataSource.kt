@@ -16,6 +16,7 @@ object FakeHeroDataSource {
             classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/warrior.png",
             zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/aries.png",
             heroStats = Stats(83,322,73,113),
+            isFavorite = false,
             skills = listOf(
                 Skill(
                     skillName = "Ambush",

@@ -14,5 +14,5 @@ data class Hero(
     val zodiac : String,
     val heroStats : Stats,
     val skills : List<Skill>,
-    val isFavorite : Boolean = false,
+    val isFavorite : Boolean,
 )
