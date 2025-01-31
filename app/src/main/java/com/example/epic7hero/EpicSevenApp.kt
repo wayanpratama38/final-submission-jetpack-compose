@@ -32,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.epic7hero.ui.navigation.BottomBarItem
 import com.example.epic7hero.ui.navigation.Screen
+import com.example.epic7hero.ui.screen.detail.Detail
 import com.example.epic7hero.ui.screen.favorite.Favorite
 import com.example.epic7hero.ui.screen.home.Home
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
@@ -128,8 +129,10 @@ fun EpicSevenApp(
                 arguments = listOf(navArgument("id"){type = NavType.LongType}))
             {
                 val id = it.arguments?.getLong("id")?:-1L
-
-
+                Detail(
+                    heroId = id,
+                    navigateBack = { navController.navigateUp() }
+                )
 
             }
         }
