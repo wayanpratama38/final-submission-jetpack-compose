@@ -2,12 +2,14 @@ package com.example.epic7hero.ui.screen.favorite
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -40,8 +42,7 @@ fun Favorite(
 
                     },
                     onFavoriteClick = { id,newState->
-
-
+                        viewModel.updateHeroes(id,newState)
                     }
                 )
             }
@@ -57,7 +58,7 @@ fun FavoriteContent(
     navigateToDetail: (Long) -> Unit,
     onFavoriteClick: (Long, Boolean) -> Unit
 ){
-    Column {
+    Column{
         if(heroes.isNotEmpty()){
             HeroesCard(
                 heroes = heroes,
@@ -66,16 +67,18 @@ fun FavoriteContent(
             )
         }else{
             Box(
-                modifier = modifier,
+                modifier = modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ){
                 Text(
-                    text = stringResource(R.string.no_favorite_hero),
-                    fontSize = 24.sp
+                    text= stringResource(R.string.no_favorite_hero),
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
                 )
-            }
-        }
 
+            }
+
+        }
     }
 }
 
