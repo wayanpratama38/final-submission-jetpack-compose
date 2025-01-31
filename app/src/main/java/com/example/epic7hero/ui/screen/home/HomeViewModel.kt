@@ -34,19 +34,11 @@ class HomeViewModel(private val repository: HeroRepository):ViewModel() {
 
     fun updateHeroes(id:Long,newState:Boolean) = viewModelScope.launch {
         repository.updateHeroes(id,newState)
-            .collect{ isSuccess ->
-                if(isSuccess) {
-                    Log.d("HomeViewModel","Success!")
-                    if(_query.value.isNotEmpty()){
-                        searchHero(_query.value)
-                    }else{
-                        getAllHero()
-                    }
-                }
+            .catch {
+                _uiState.value = UiState.Error(it.message.toString())
             }
+
     }
-
-
 
     fun getAllHero() = viewModelScope.launch{
         repository.getAllHero()
