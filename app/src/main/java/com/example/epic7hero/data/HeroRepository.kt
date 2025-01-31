@@ -13,17 +13,11 @@ import kotlinx.coroutines.flow.map
 
 class HeroRepository {
 
-    private val heroes  = mutableListOf<Hero>()
 
     private val _heroesData = MutableStateFlow<List<Hero>>(emptyList())
     val heroesData : StateFlow<List<Hero>> = _heroesData.asStateFlow()
 
     init{
-//        if(heroes.isEmpty()){
-//            FakeHeroDataSource.heroData.forEach {
-//                heroes.add(it)
-//            }
-//        }
         if(_heroesData.value.isEmpty()){
             _heroesData.value = FakeHeroDataSource.heroData.toList()
         }
@@ -40,11 +34,12 @@ class HeroRepository {
     }
 
     fun searchHero(query : String):Flow<List<Hero>>{
-        return heroesData.map{
-            heroes.filter {
-                it.name.contains(query, ignoreCase = true)
+        return heroesData
+            .map { heroesList ->
+                heroesList.filter { hero ->
+                    hero.name.contains(query,ignoreCase = true)
+                }
             }
-        }
     }
 
     fun updateHeroes(id:Long,newState:Boolean): Flow<Boolean> {
