@@ -30,6 +30,12 @@ class HeroRepository {
         }
     }
 
+    fun searchHero(query : String):List<Hero>{
+        return FakeHeroDataSource.heroData.filter {
+            it.name.contains(query, ignoreCase = true)
+        }
+    }
+
 
     companion object {
         @Volatile
