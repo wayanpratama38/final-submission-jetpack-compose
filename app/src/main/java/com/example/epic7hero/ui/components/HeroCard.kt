@@ -63,7 +63,7 @@ fun HeroCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .padding(8.dp)
-                    .size(112.dp)
+                    .size(64.dp)
                     .clip(CircleShape)
             )
             Column(
@@ -86,7 +86,7 @@ fun HeroCard(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Medium
                     )
                 }
                 Row(
