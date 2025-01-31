@@ -56,14 +56,15 @@ fun Home(
                 HomeContent(
                     heroes = uiState.data,
                     modifier = modifier,
-                    navigateToDetail = navigateToDetail,
+                    navigateToDetail = { id ->
+                        navigateToDetail(id)
+                    },
                     query = query,
                     onQueryChange = {
                         viewModel.searchHero(it)
                     },
                     onFavoriteClick = {id,newState->
                         viewModel.updateHeroes(id,newState)
-                        Log.d("HomeScreen","id : $id New state $newState")
                     }
                 )
             }

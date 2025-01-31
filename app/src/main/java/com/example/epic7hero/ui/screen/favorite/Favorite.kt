@@ -38,8 +38,8 @@ fun Favorite(
             is UiState.Success -> {
                 FavoriteContent(
                     heroes = uiState.data,
-                    navigateToDetail = {
-
+                    navigateToDetail = {id->
+                        navigateToDetail(id)
                     },
                     onFavoriteClick = { id,newState->
                         viewModel.updateHeroes(id,newState)
