@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.epic7hero.R
 import com.example.epic7hero.data.HeroRepository
@@ -91,12 +92,16 @@ fun HomeContent(
                 navigateToDetail =  navigateToDetail
             )
         }else{
-            Text(
-                text = stringResource(R.string.hero_not_found),
-                modifier = modifier
-                    .fillMaxSize()
-                    .align(Alignment.CenterHorizontally)
-            )
+            Box(
+                modifier = modifier,
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = stringResource(R.string.hero_not_found),
+                    fontSize = 24.sp
+                )
+            }
+
         }
     }
 }

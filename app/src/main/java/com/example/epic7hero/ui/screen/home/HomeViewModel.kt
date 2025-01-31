@@ -37,12 +37,6 @@ class HomeViewModel(private val repository: HeroRepository):ViewModel() {
             .catch {
                 _uiState.value = UiState.Error(it.message.toString())
             }
-        if(_query.value.isNotEmpty()){
-            searchHero(_query.value)
-        }else{
-            getAllHero()
-        }
-
     }
 
     fun getAllHero() = viewModelScope.launch{
