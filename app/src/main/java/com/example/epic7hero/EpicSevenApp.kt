@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -58,7 +59,7 @@ fun BottomBar(
             ),
             BottomBarItem(
                 title = stringResource(R.string.favorite_bottom_name),
-                icon = Icons.Default.Star,
+                icon = Icons.Outlined.Favorite,
                 screen = Screen.Favorite,
             ),
             BottomBarItem(

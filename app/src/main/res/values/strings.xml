@@ -8,4 +8,6 @@
     <string name="no_favorite_hero">Tidak ada Hero Favorit</string>
     <string name="expandable_card_title">Title Expandable Card</string>
     <string name="search_icon">Search Icon</string>
+    <string name="hero_profile_image">Hero Profile Image</string>
+    <string name="hero_class">Hero Class</string>
 </resources>

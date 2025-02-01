@@ -1,5 +1,6 @@
 package com.example.epic7hero.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,20 +10,25 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
@@ -49,17 +55,20 @@ fun HeroCard(
     Box(
         modifier = modifier
             .padding(8.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        contentAlignment = Alignment.CenterStart
+            .clip(RoundedCornerShape(15.dp))
+            .wrapContentSize()
+            .background(MaterialTheme.colorScheme.primary),
+        contentAlignment = Alignment.CenterStart,
+
     ){
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(8.dp)
         ) {
             AsyncImage(
                 model = profileImage,
                 placeholder = painterResource(R.drawable.profile_image_placeholder),
-                contentDescription = "Hero Profile Image",
+                contentDescription = stringResource(R.string.hero_profile_image),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .padding(8.dp)
@@ -67,26 +76,31 @@ fun HeroCard(
                     .clip(CircleShape)
             )
             Column(
-                modifier = Modifier.weight(1f).padding(end = 8.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     AsyncImage(
                         model = classes,
                         placeholder = painterResource(R.drawable.classes_image_placeholder),
-                        contentDescription = "Hero Class",
+                        contentDescription = stringResource(R.string.hero_class),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(24.dp)
+                            .size(24.dp),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
                     )
                     Text(
                         text = name,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Medium
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
                 Row(
@@ -106,7 +120,8 @@ fun HeroCard(
                         contentDescription = "Hero Zodiac",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(24.dp)
+                            .size(24.dp),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
                     )
                     AsyncImage(
                         model = rarity,
@@ -122,14 +137,15 @@ fun HeroCard(
             Icon(
                 imageVector = if (!isFavorite) Icons.Outlined.FavoriteBorder else Icons.Outlined.Favorite,
                 contentDescription = null,
-                tint = if(!isFavorite) Color.Black else Color.Red,
+                tint = if(!isFavorite) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
                     .clickable {
-                        onFavoriteClick(id,!isFavorite)
+                        onFavoriteClick(id, !isFavorite)
                     }
                     .size(32.dp)
                     .align(Alignment.CenterVertically)
-                    .padding(end=8.dp)
+                    .padding(end = 8.dp)
+                    .clip(CircleShape)
             )
 
         }
