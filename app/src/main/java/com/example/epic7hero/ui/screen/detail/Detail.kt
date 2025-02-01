@@ -4,6 +4,7 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,14 +26,21 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.example.epic7hero.R
 import com.example.epic7hero.data.HeroRepository
 import com.example.epic7hero.di.Injection
+import com.example.epic7hero.model.Stats
 import com.example.epic7hero.ui.common.UiState
+import com.example.epic7hero.ui.components.ExpandableCard
 import com.example.epic7hero.ui.screen.ViewModelFactory
+import com.example.epic7hero.ui.theme.Epic7HeroTheme
 
 
 fun Modifier.parallaxLayoutModifier(scrollState : ScrollState , rate : Int)=
@@ -58,6 +67,7 @@ fun Detail(
             is UiState.Success->{
                 DetailContent(
                     portraitImage = uiState.data.portraitImage,
+                    stats = uiState.data.heroStats,
                     onFavoriteClick = { id,newState->
                         viewModel.updateFavorite(id,newState)
                     },
@@ -73,6 +83,7 @@ fun Detail(
 fun DetailContent(
     modifier: Modifier = Modifier,
     portraitImage : String,
+    stats: Stats,
     onFavoriteClick : (Long,Boolean)->Unit,
     navigateBack: () -> Unit
 ){
@@ -96,7 +107,7 @@ fun DetailContent(
                     .parallaxLayoutModifier(scrollState,15)
             )
 
-            HeroDetailContent()
+            HeroDetailContent(stats = stats)
         }
 
     }
@@ -106,31 +117,56 @@ fun DetailContent(
 @Composable
 fun HeroDetailContent(
     modifier : Modifier = Modifier,
+    stats: Stats
 ){
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(color = Color.LightGray, shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
     ) {
-        Text(text = "Lorem ipsum odor amet, consectetuer adipiscing elit. Ultrices morbi porta fermentum interdum cubilia efficitur placerat nec ad. Habitasse natoque suspendisse; per feugiat venenatis inceptos venenatis habitasse. Non sapien leo aliquam dis potenti elit dis. Commodo enim penatibus fames malesuada vehicula imperdiet justo. Accumsan dapibus justo non semper ligula ut cras dui. Dis consectetur natoque tellus sagittis varius parturient dis ex. Eget inceptos sollicitudin potenti sollicitudin class. Curabitur quam ornare ipsum dis, sed viverra ad.\n" +
+        Text("Lorem ipsum odor amet, consectetuer adipiscing elit. Consectetur taciti dui bibendum ultricies ex. Arcu aliquet eget purus massa lacus ornare eget. Bibendum aliquet a ante enim fermentum a. Rhoncus augue aenean magnis laoreet lacus velit vestibulum congue. Eros congue taciti faucibus ultricies dui integer elit accumsan. Facilisi etiam ridiculus sociosqu magna mollis felis. Maximus adipiscing luctus bibendum accumsan neque nisl montes consectetur sed.\n" +
                 "\n" +
-                "Ut orci hac quis integer nulla non venenatis eleifend aptent. Mauris elementum cras praesent hendrerit integer ligula tempus etiam nullam. Habitant nec phasellus eu semper quam. Habitant pulvinar tempor taciti dignissim habitasse auctor maximus tristique. Habitant posuere mus vel nibh proin vel quis ultricies faucibus. Feugiat in litora amet cras orci; eu nisl fermentum. Cras vivamus eu volutpat; taciti sapien venenatis gravida imperdiet.\n" +
+                "Vitae ex vulputate nec dui ante at feugiat. Venenatis accumsan mollis quis tempus eu hac. Sodales dui nulla urna; consectetur netus eget. Quis imperdiet sed auctor et ante in bibendum. Nullam leo ultrices; egestas conubia ipsum ridiculus scelerisque. Volutpat arcu egestas velit urna suscipit. Rutrum consequat pretium senectus laoreet, ornare aptent pulvinar et curae. Nisi semper luctus malesuada nibh dis lacinia. Habitant risus commodo etiam malesuada venenatis phasellus. Tellus dictum ante himenaeos blandit nullam.\n" +
                 "\n" +
-                "Convallis mauris massa sociosqu malesuada in. Vitae himenaeos elit nullam non, massa dui. Pulvinar commodo auctor conubia platea consequat vulputate. Odio finibus nibh aenean feugiat maximus. Malesuada feugiat malesuada quam tincidunt interdum magnis lobortis neque integer. Adipiscing tincidunt placerat venenatis condimentum penatibus urna erat; mollis tempor. Urna blandit at donec consectetur eros libero integer vivamus.\n" +
+                "Cras lobortis sit suspendisse suscipit dictumst vitae consectetur. Facilisis sollicitudin nostra tincidunt dictum senectus aenean morbi. Ullamcorper ligula orci ullamcorper convallis velit tempus maecenas metus. Magna ad ad torquent porttitor taciti fermentum. Senectus interdum enim orci conubia iaculis. Praesent enim viverra; faucibus aliquam habitasse neque. Diam inceptos mus pellentesque auctor felis. Bibendum ornare semper dignissim, semper dis proin suspendisse. Sem senectus quisque facilisis dis bibendum; ornare sed. Sed habitasse accumsan faucibus ante porttitor.\n" +
                 "\n" +
-                "Luctus imperdiet hendrerit ultrices nisl suspendisse malesuada. Quisque nullam adipiscing luctus etiam malesuada. Donec elit cras maecenas; vestibulum vivamus tempus. Porttitor suspendisse donec placerat pretium pharetra natoque eget suscipit. Sem aliquam molestie nunc; lorem suscipit blandit. Nibh consectetur tellus ultrices felis, sollicitudin sapien ut ipsum et. Facilisi potenti cras hac faucibus montes. Nulla lacus finibus dis dictumst interdum.\n" +
+                "Accumsan fusce faucibus sit ultricies; at ac. Curabitur conubia etiam nam habitasse lacus finibus felis. Mauris curae quis tempor taciti elit montes rutrum iaculis. Scelerisque consequat diam scelerisque gravida integer eros conubia curae. Augue mattis volutpat maximus vitae cubilia parturient. Semper risus sapien imperdiet sociosqu, ligula senectus justo. Consequat sed elit; nostra tempor dis vestibulum. Curabitur nisl sollicitudin fusce consectetur, dolor platea cras.\n" +
                 "\n" +
-                "Vel volutpat class ornare dapibus sodales ex. Molestie arcu ipsum est mus dapibus. Accumsan libero nullam maximus eu; sociosqu posuere odio. Aenean posuere erat risus eu est accumsan. Etiam conubia ipsum facilisis sociosqu aptent lobortis. Nunc condimentum cras scelerisque curae tortor. Venenatis convallis mi taciti quam hendrerit. Velit nisi metus fames porttitor sodales.\n" +
+                "Nostra leo rhoncus sociosqu commodo posuere maecenas. Odio urna tempor volutpat; turpis in mi. Rhoncus neque vivamus commodo class suspendisse elit mus magna nascetur. Condimentum quisque per et, elit vel quam eget leo. Senectus cras sagittis nunc sollicitudin id eleifend ullamcorper nisi torquent. Sem arcu a venenatis augue, nullam facilisis eros eleifend finibus. Scelerisque senectus maecenas fusce hac vel orci, quam tempus condimentum. Euismod parturient conubia suscipit at diam suscipit felis. Ridiculus maecenas suspendisse risus posuere ad orci senectus cras.\n" +
                 "\n" +
-                "Efficitur tempus integer porta et maecenas. Enim condimentum risus fames etiam pellentesque quisque iaculis nullam. Luctus inceptos nulla ultricies sagittis himenaeos bibendum luctus praesent. Non magnis primis primis porta fermentum turpis feugiat congue. Dui volutpat sit eget facilisis orci a placerat suspendisse sodales. Fermentum montes urna per diam ante eu metus viverra.\n" +
+                "Eleifend volutpat tellus mus luctus dapibus maecenas; per magna. Hendrerit erat curae non dapibus dictumst. Imperdiet duis dis morbi ligula egestas laoreet fusce curae. Odio semper morbi nibh, potenti mauris enim tempus ipsum. Suscipit hac sed donec felis quam netus ad senectus. Velit blandit bibendum phasellus dui montes tempor vestibulum. Dictum proin ultrices aenean accumsan sem aptent fermentum. Vestibulum mus molestie felis porta; nibh pulvinar. Augue adipiscing hac euismod, finibus cubilia ut.\n" +
                 "\n" +
-                "Gravida pellentesque ornare vitae pulvinar quisque elementum. Nisl cubilia fusce bibendum scelerisque senectus augue hac aptent ac. Malesuada dis placerat mi elementum tempor ligula dictum bibendum varius. Cras vehicula massa nunc cubilia integer. Platea tempus laoreet feugiat; pretium aliquam vehicula. Neque nascetur amet nullam eget dui ultrices justo erat? Tempor arcu mauris conubia metus vehicula. Etiam habitant nostra tempor cras suspendisse mi.\n" +
+                "In tempus urna lobortis commodo dignissim. Platea at cubilia quis parturient congue efficitur congue fusce lobortis. Platea venenatis phasellus fermentum maximus aptent; netus venenatis dapibus cursus. Vivamus ante quis est; dapibus sapien penatibus. Etiam condimentum vivamus diam; purus iaculis eget. Curae cursus nam metus tellus leo dis. Lorem condimentum maximus sed primis sapien tempus scelerisque. Augue fames arcu per augue integer nibh ac.\n" +
                 "\n" +
-                "Habitant dignissim ac dictum posuere et id tempor suspendisse. Diam odio sit quam; diam rhoncus purus. Eu vulputate velit metus himenaeos pharetra enim semper justo rutrum. Consectetur parturient varius fames suscipit turpis nostra. Adipiscing parturient nisi libero scelerisque ex condimentum suscipit. Erat eros dictum torquent; finibus faucibus neque nisl. Non per diam mollis duis nunc finibus semper fusce. Dapibus himenaeos in id velit pretium natoque litora. Purus sapien ultricies mi scelerisque tempor posuere.\n" +
+                "Nullam nunc porttitor feugiat pharetra montes ultricies maecenas. Non mollis lacus luctus hac vivamus. Eget bibendum dis hendrerit sit justo dolor velit. Mattis dictum at habitasse vel malesuada vivamus arcu. Nostra tristique dis semper dictum imperdiet hac donec metus ad. Velit venenatis hac commodo proin viverra curabitur feugiat.\n" +
                 "\n" +
-                "Turpis suscipit ornare tortor; condimentum ullamcorper facilisi mi porta. Eu placerat taciti hac potenti primis consequat. Risus mi imperdiet ligula ridiculus efficitur sit. Orci ullamcorper dignissim phasellus ullamcorper platea himenaeos cubilia taciti. Mollis ultrices pretium risus sapien taciti mus dis suscipit. Convallis ridiculus ut auctor eget fusce fringilla. Magna suscipit mi ultricies, viverra pharetra proin conubia rhoncus urna. Dictum leo lectus dapibus nibh netus dis. Diam arcu tempor eros tempor pulvinar, fusce netus condimentum.\n" +
+                "Dolor amet arcu ultrices nec nisi mus tortor cursus. Ut sapien erat id ornare at suscipit lobortis iaculis. Sodales nisl curae dictum ipsum dictum neque eros curabitur. Neque metus cras taciti torquent nibh. Efficitur ultricies a pretium magnis diam at nunc quis sodales. Habitasse dapibus tempor eu senectus dui.\n" +
                 "\n" +
-                "Laoreet fringilla luctus curae lacinia tristique, habitant finibus et. Quam urna vulputate, sagittis taciti luctus penatibus. Mollis magna curae mattis auctor consectetur justo bibendum. Lobortis diam sit sollicitudin augue nibh proin. Torquent taciti ad condimentum feugiat et amet curabitur. Pretium nullam integer ultricies magnis diam fusce. Taciti habitasse vehicula; pulvinar pellentesque eu imperdiet augue. Amet ultrices torquent phasellus leo massa praesent.",
-            modifier = Modifier.padding(16.dp))
+                "Condimentum ultrices torquent nisl aenean ipsum. Varius ex odio ut vivamus ridiculus dignissim nisi potenti sem. Auctor in vivamus urna ad nascetur malesuada volutpat id. Nam rutrum vulputate congue elit lobortis dolor. Dictumst tellus natoque accumsan orci; ipsum cubilia eros. Himenaeos sem nam consectetur varius aliquam iaculis. Tempus platea laoreet, interdum tristique elit interdum molestie condimentum. Eget lobortis rhoncus cursus amet accumsan in suspendisse ante.",)
+        ExpandableCard(
+            title = "Stat",
+        ) {
+            Row(
+              verticalAlignment = Alignment.CenterVertically
+            ){
+                Icon(
+                    painter = painterResource(R.drawable.attack),
+                    contentDescription = null,
+                )
+                Text(
+                    text = stats.attack.toString(),
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+@Preview(showBackground = true, device = Devices.PIXEL_4)
+fun DetailPreview(){
+    Epic7HeroTheme {
+        Detail(heroId = 1, navigateBack = {})
     }
 }

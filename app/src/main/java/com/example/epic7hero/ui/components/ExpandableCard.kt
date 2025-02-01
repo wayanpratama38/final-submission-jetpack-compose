@@ -1,10 +1,10 @@
 package com.example.epic7hero.ui.components
 
-import android.view.animation.AlphaAnimation
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,20 +25,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.DefaultAlpha
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.epic7hero.R
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
 
 @Composable
 fun ExpandableCard(
     title : String,
-    content : @Composable () -> Unit
+    content : @Composable () -> Unit,
 ) {
     var expandableState by remember { mutableStateOf(false) }
     val rotateDegree by animateFloatAsState(
@@ -61,13 +58,15 @@ fun ExpandableCard(
     ) {
         Column (
             modifier = Modifier
+                .background(color = Color.White)
                 .padding(12.dp)
                 .fillMaxWidth()
+
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ){
-                Text(stringResource(R.string.expandable_card_title),
+                Text(text = title ,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .weight(6f),
