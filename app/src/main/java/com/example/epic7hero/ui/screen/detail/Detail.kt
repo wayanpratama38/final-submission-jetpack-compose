@@ -1,11 +1,18 @@
 package com.example.epic7hero.ui.screen.detail
 
 import android.graphics.drawable.Drawable
+import android.text.style.UnderlineSpan
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,38 +23,52 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.ModifierInfo
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -63,6 +84,7 @@ import com.example.epic7hero.ui.common.UiState
 import com.example.epic7hero.ui.components.ExpandableCard
 import com.example.epic7hero.ui.screen.ViewModelFactory
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
+import kotlinx.coroutines.launch
 
 
 fun Modifier.parallaxLayoutModifier(scrollState : ScrollState , rate : Int)=
@@ -120,7 +142,19 @@ fun DetailContent(
     heroLore : String,
     navigateBack: () -> Unit
 ){
+    // deklarasi scrollState
     val scrollState = rememberScrollState()
+
+    // State simpanan dan deklarasi coroutine scope
+    val coroutineScope = rememberCoroutineScope()
+    val showButton : Boolean by remember {
+        derivedStateOf { scrollState.value>100 }
+    }
+
+    val showBack : Boolean by remember {
+        derivedStateOf { scrollState.value<100 }
+    }
+
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -149,6 +183,8 @@ fun DetailContent(
                         color = Color.LightGray,
                         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
                     )
+                    .padding(bottom = 40.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ){
                 HeroInformationContent(
                     name = name,
@@ -157,11 +193,141 @@ fun DetailContent(
                     classes = classes,
                     element= element)
 
-                HeroDetailContent(stats = stats,heroLore = heroLore)
+                // invoke hero stat
+                HeroStatInvoke(stats = stats)
+                // invoke hero lore
+                HeroLoreInvoke(heroLore = heroLore)
+                // invoke hero skill
+                HeroSkillsInvoke(skills = skills)
+            }
+        }
 
-                // agar parallax bisa terjadi meskipun konten lebih sedikit
-                Spacer(modifier = Modifier.height(600.dp))
+        // Animasi Visibilitas dari tombol back
+        AnimatedVisibility(
+            visible = showBack,
+            enter = fadeIn(),
+            exit = fadeOut(),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.TopStart)
+        ) {
+            IconButton(
+                onClick = { navigateBack() }) {
+                Icon(
+                    imageVector = Icons.Outlined.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.Black,
+                    modifier = Modifier
+                        .size(32.dp)
+                        .border(width = 1.dp, color = Color.Black, shape = CircleShape)
+                        .clip(CircleShape)
+                        .padding(8.dp)
 
+                )
+            }
+        }
+
+        // animasi visibilitas dari tombol scroll to top
+        AnimatedVisibility(
+            visible = showButton,
+            enter = fadeIn() + slideInVertically(),
+            exit = fadeOut() + slideOutVertically(),
+            modifier = Modifier
+                .padding(bottom = 30.dp)
+                .align(Alignment.BottomCenter)
+        ) {
+            ScrollToTopButton(
+                onClick = {
+                    coroutineScope.launch {
+                        scrollState.animateScrollTo(0)
+                    }
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun HeroSkillsInvoke(
+    skills: List<Skill>
+){
+    ExpandableCard(
+        title = "Skills"
+    ) {
+        skills.forEach { skill ->
+            HeroSkillUi(
+                skillImage = skill.skillImage,
+                skillName = skill.skillName,
+                skillDescription = skill.skillDescription,
+                skillCooldown = skill.skillCooldown,
+                soulObtain = skill.soulObtain
+            )
+        }
+    }
+}
+
+@Composable
+fun HeroSkillUi(
+    skillImage : String,
+    skillName : String,
+    skillDescription : String,
+    skillCooldown : Int,
+    soulObtain : Int,
+){
+    Row(
+        modifier = Modifier.wrapContentSize().padding(8.dp).border(width = 1.dp, color = Color.Black, shape = RectangleShape),
+        verticalAlignment = Alignment.CenterVertically
+    ){
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.padding(8.dp)
+        ) {
+            AsyncImage(
+                model = skillImage,
+                contentDescription = skillName,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier.size(width = 82.dp, height = 84.dp)
+            )
+            Text(
+                text = skillName,
+                modifier = Modifier.width(82.dp),
+                textAlign = TextAlign.Center
+            )
+        }
+        Column (
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Text("Description",
+                fontWeight = FontWeight.Bold,
+                modifier  = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                textDecoration = TextDecoration.Underline
+            )
+            Text(text = skillDescription,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Justify
+            )
+            if(soulObtain>0){
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ){
+                    Text(text = "Cooldown : $skillCooldown",
+                        modifier = Modifier.weight(3f),
+                        textAlign = TextAlign.Start
+                    )
+                    Text(text = "Souls Obtain : $soulObtain",
+                        color = Color.Blue,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }else{
+                Text(text = "Cooldown : $skillCooldown",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Start
+                )
             }
         }
 
@@ -173,6 +339,7 @@ fun DetailContent(
 fun HeroStatInvoke(
     stats: Stats
 ) {
+
     val statIcons = listOf(
         R.drawable.attack,
         R.drawable.health,
@@ -182,36 +349,28 @@ fun HeroStatInvoke(
     val statNames = listOf("Attack","Health","Defense","Speed")
     val statValues = listOf(stats.attack,stats.health,stats.defense,stats.speed)
 
+    Text(text = "Status",
+        fontSize = 24.sp,
+        modifier = Modifier
+            .fillMaxWidth(),
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center
+    )
     statIcons.zip(statNames.zip(statValues)).forEach { (icon,pair)->
         val (name,value ) = pair
         StatDetailContent(icon=icon, stats = value, iconName = name)
     }
 }
 
-//
 @Composable
-fun HeroDetailContent(
-    modifier : Modifier = Modifier,
-    stats: Stats,
-    heroLore: String
-
+fun HeroLoreInvoke(
+    heroLore : String
 ){
-    Text(text = "Status",
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp),
-        textAlign = TextAlign.Center)
-    Spacer(modifier = Modifier.padding(8.dp))
-    HeroStatInvoke(stats = stats)
-    Spacer(modifier = Modifier.padding(8.dp))
     ExpandableCard(
         title = "Hero Lore"
     ) {
         Text(text = heroLore)
     }
-
 }
 
 @Composable
@@ -222,7 +381,6 @@ fun HeroInformationContent(
     classes: String,
     element: String
 ){
-
     Box(
         modifier = Modifier
             .wrapContentSize()
@@ -237,7 +395,8 @@ fun HeroInformationContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(8.dp)
+            ,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(){
@@ -271,7 +430,6 @@ fun HeroInformationContent(
                     modifier = Modifier.size(width = 91.dp, height = 21.dp)
                 )
             }
-
         }
     }
 }
@@ -284,6 +442,7 @@ fun StatDetailContent(
 ){
     Row (
         modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
     ){
         Icon(
             painter = painterResource(icon),
@@ -299,6 +458,21 @@ fun StatDetailContent(
     }
 }
 
+@Composable
+fun ScrollToTopButton(
+    onClick : () -> Unit,
+    modifier: Modifier = Modifier
+){
+    FilledTonalButton(
+        onClick = onClick,
+        modifier = modifier
+    ) {
+        Icon(
+            imageVector = Icons.Filled.KeyboardArrowUp,
+            contentDescription = "Scroll to Top"
+        )
+    }
+}
 
 @Composable
 @Preview(showBackground = true, device = Devices.PIXEL_4)

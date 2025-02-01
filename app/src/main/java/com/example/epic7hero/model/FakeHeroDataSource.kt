@@ -24,6 +24,20 @@ object FakeHeroDataSource {
                     skillDescription = "Attacks the enemy with bloodied wings, and increases Combat Readiness of the caster by 15%. When used on the caster's turn, has a 35% chance to activate Might as an extra effect. Damage dealt increases proportional to the caster's max Health. Might: Increases Combat Readiness of all allies by 15%.",
                     skillCooldown = 0,
                     soulObtain = 1,
+                ),
+                Skill(
+                    skillName = "Ambush",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/abigail/skill/1_ambush.png",
+                    skillDescription = "Attacks the enemy with bloodied wings, and increases Combat Readiness of the caster by 15%. When used on the caster's turn, has a 35% chance to activate Might as an extra effect. Damage dealt increases proportional to the caster's max Health. Might: Increases Combat Readiness of all allies by 15%.",
+                    skillCooldown = 0,
+                    soulObtain = 1,
+                ),
+                Skill(
+                    skillName = "Ambush",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/abigail/skill/1_ambush.png",
+                    skillDescription = "Attacks the enemy with bloodied wings, and increases Combat Readiness of the caster by 15%. When used on the caster's turn, has a 35% chance to activate Might as an extra effect. Damage dealt increases proportional to the caster's max Health. Might: Increases Combat Readiness of all allies by 15%.",
+                    skillCooldown = 0,
+                    soulObtain = 0,
                 )
             )
         )
