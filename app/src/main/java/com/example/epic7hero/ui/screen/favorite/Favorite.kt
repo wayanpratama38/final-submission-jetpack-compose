@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.epic7hero.R
-import com.example.epic7hero.data.HeroRepository
+import com.example.epic7hero.di.Injection
 import com.example.epic7hero.model.Hero
 import com.example.epic7hero.ui.common.UiState
 import com.example.epic7hero.ui.screen.ViewModelFactory
@@ -24,9 +24,8 @@ import com.example.epic7hero.ui.theme.Epic7HeroTheme
 
 @Composable
 fun Favorite(
-    modifier : Modifier = Modifier,
     viewModel: FavoriteViewModel = viewModel(
-        factory = ViewModelFactory(HeroRepository.getInstance())
+        factory = ViewModelFactory(Injection.provideRepository())
     ),
     navigateToDetail : (Long)->Unit
 ){
