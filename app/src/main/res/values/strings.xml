@@ -10,4 +10,8 @@
     <string name="search_icon">Search Icon</string>
     <string name="hero_profile_image">Hero Profile Image</string>
     <string name="hero_class">Hero Class</string>
+    <string name="status">Status</string>
+    <string name="drop_down_icon">Drop Down Icon</string>
+    <string name="hero_lore">Hero Lore</string>
+    <string name="back">Back</string>
 </resources>

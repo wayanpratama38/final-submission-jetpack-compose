@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,10 +40,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -155,7 +158,7 @@ fun DetailContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
-                        color = Color.LightGray,
+                        color = MaterialTheme.colorScheme.onSurface,
                         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
                     )
                     .padding(bottom = 40.dp),
@@ -190,12 +193,13 @@ fun DetailContent(
                 onClick = { navigateBack() }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                    contentDescription = "Back",
-                    tint = Color.Black,
+                    contentDescription = stringResource(R.string.back),
+                    tint = MaterialTheme.colorScheme.surface,
                     modifier = Modifier
                         .size(32.dp)
                         .border(width = 1.dp, color = Color.Black, shape = CircleShape)
                         .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.onSurface)
                         .padding(8.dp)
 
                 )
@@ -250,7 +254,12 @@ fun HeroSkillUi(
     soulObtain : Int,
 ){
     Row(
-        modifier = Modifier.wrapContentSize().padding(8.dp).border(width = 1.dp, color = Color.Black, shape = RectangleShape),
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(8.dp)
+            .clip(RoundedCornerShape(15.dp))
+            .border(width = 1.dp, color = Color.Black, shape = RectangleShape)
+            .background(MaterialTheme.colorScheme.onSecondary),
         verticalAlignment = Alignment.CenterVertically
     ){
         Column(
@@ -266,7 +275,8 @@ fun HeroSkillUi(
             Text(
                 text = skillName,
                 modifier = Modifier.width(82.dp),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyLarge
             )
         }
         Column (
@@ -278,12 +288,14 @@ fun HeroSkillUi(
                 modifier  = Modifier
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                textDecoration = TextDecoration.Underline
+                textDecoration = TextDecoration.Underline,
+                style = MaterialTheme.typography.titleSmall
             )
             Text(text = skillDescription,
                 modifier = Modifier
                     .fillMaxWidth(),
-                textAlign = TextAlign.Justify
+                textAlign = TextAlign.Justify,
+                style = MaterialTheme.typography.bodyMedium
             )
             if(soulObtain>0){
                 Row(
@@ -291,17 +303,20 @@ fun HeroSkillUi(
                 ){
                     Text(text = "Cooldown : $skillCooldown",
                         modifier = Modifier.weight(3f),
-                        textAlign = TextAlign.Start
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.bodyMedium
                     )
                     Text(text = "Souls Obtain : $soulObtain",
-                        color = Color.Blue,
-                        modifier = Modifier.weight(1f)
+                        color = MaterialTheme.colorScheme.tertiary,
+                        modifier = Modifier.weight(2f),
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }else{
                 Text(text = "Cooldown : $skillCooldown",
                     modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
         }
@@ -324,11 +339,11 @@ fun HeroStatInvoke(
     val statNames = listOf("Attack","Health","Defense","Speed")
     val statValues = listOf(stats.attack,stats.health,stats.defense,stats.speed)
 
-    Text(text = "Status",
-        fontSize = 24.sp,
+    Text(text = stringResource(R.string.status),
         modifier = Modifier
             .fillMaxWidth(),
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleLarge,
+        color = MaterialTheme.colorScheme.onSecondary,
         textAlign = TextAlign.Center
     )
     statIcons.zip(statNames.zip(statValues)).forEach { (icon,pair)->
@@ -343,11 +358,23 @@ fun HeroLoreInvoke(
     heroLore : String
 ){
     ExpandableCard(
-        title = "Hero Lore"
+        title = stringResource(R.string.hero_lore)
     ) {
-        Text(text = heroLore,
-            modifier = Modifier.padding(16.dp),
-            textAlign = TextAlign.Justify)
+        Row (
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(8.dp)
+                .clip(RoundedCornerShape(15.dp))
+                .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(15.dp))
+                .background(MaterialTheme.colorScheme.onSecondary),
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text(text = heroLore,
+                modifier = Modifier.padding(16.dp),
+                textAlign = TextAlign.Justify,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     }
 }
 
@@ -363,12 +390,11 @@ fun HeroInformationContent(
     Box(
         modifier = Modifier
             .wrapContentSize()
-            .border(
-                1.dp,
-                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-                color = Color.Black
-            )
-            .background(Color.Green, shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
+            .background
+                (
+                color = MaterialTheme.colorScheme.secondary,
+                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+            ),
         contentAlignment = Alignment.Center
     ){
         Column(
@@ -383,18 +409,20 @@ fun HeroInformationContent(
                     model = classes,
                     contentScale = ContentScale.Fit,
                     contentDescription = "Classes",
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(24.dp),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary)
                 )
                 Text(text = name,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold)
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    style = MaterialTheme.typography.titleLarge)
             }
             Row{
                 AsyncImage(
                     model = zodiac,
                     contentScale = ContentScale.Fit,
                     contentDescription = "Zodiac",
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(24.dp),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary)
                 )
                 AsyncImage(
                     model = element,
@@ -426,15 +454,21 @@ fun StatDetailContent(
     ){
         Icon(
             painter = painterResource(icon),
-            contentDescription = null,
-            modifier = Modifier.weight(1f)
+            contentDescription = iconName,
+            modifier = Modifier.weight(1f),
+            tint = MaterialTheme.colorScheme.onSecondary
         )
         Text(
             text = iconName,
-            modifier = Modifier.weight(4f)
+            modifier = Modifier.weight(4f),
+            color = MaterialTheme.colorScheme.onSecondary,
+            style = MaterialTheme.typography.bodyLarge
         )
         Text(text = stats.toString(),
-            modifier = Modifier.weight(1f))
+            modifier = Modifier.weight(1f),
+            color = MaterialTheme.colorScheme.onSecondary,
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 

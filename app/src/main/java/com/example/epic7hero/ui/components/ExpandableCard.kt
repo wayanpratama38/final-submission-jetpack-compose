@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,11 +27,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.epic7hero.R
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
 
 @Composable
@@ -58,7 +61,7 @@ fun ExpandableCard(
     ) {
         Column (
             modifier = Modifier
-                .background(color = Color.White)
+                .background(color = MaterialTheme.colorScheme.secondary)
                 .padding(12.dp)
                 .fillMaxWidth()
 
@@ -67,11 +70,12 @@ fun ExpandableCard(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Text(text = title ,
-                    fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .weight(6f),
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSecondary
                 )
 
                 IconButton(
@@ -85,7 +89,8 @@ fun ExpandableCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowDropDown,
-                        contentDescription = "Drop Down Icon",
+                        contentDescription = stringResource(R.string.drop_down_icon),
+                        tint = MaterialTheme.colorScheme.onSecondary
 
                     )
                 }
