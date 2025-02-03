@@ -37,6 +37,7 @@ import com.example.epic7hero.ui.navigation.Screen
 import com.example.epic7hero.ui.screen.detail.Detail
 import com.example.epic7hero.ui.screen.favorite.Favorite
 import com.example.epic7hero.ui.screen.home.Home
+import com.example.epic7hero.ui.screen.profile.Profile
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
 
 @Composable
@@ -130,6 +131,10 @@ fun EpicSevenApp(
                 Favorite(navigateToDetail = {id->
                     navController.navigate(Screen.DetailHero.createRoute(id))
                 })
+            }
+
+            composable(Screen.Profile.route){
+                Profile()
             }
 
             composable(
