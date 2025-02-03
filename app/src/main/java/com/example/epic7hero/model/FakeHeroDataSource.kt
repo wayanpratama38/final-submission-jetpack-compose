@@ -251,6 +251,113 @@ object FakeHeroDataSource {
                     soulObtain = 3,
                 )
             )
+        ),Hero(
+            id = 8,
+            name = "Rimuru",
+            heroLore = "Leader of the world of monsters, Jura Tempest Federation. Although its base form is a Slime, Rimuru possesses extreme strength and skills. It's not interested in invading or occupying other lands, and just wants everyone to get along.",
+            portraitImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/rimuru/portrait/rimuru.png",
+            profileImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/rimuru/profile/rimuru.png",
+            element = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ElementImages/earth.png",
+            rarity = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroeRarityImages/5star.png",
+            classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/warrior.png",
+            zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/libra.png",
+            heroStats = Stats(attack=1119,defense=627,health=6266,speed=109),
+            isFavorite = false,
+            skills = listOf(
+                Skill(
+                    skillName = "Okay, Shall I Get Started?",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/rimuru/skill/1_okay_shall_i_get_started.png",
+                    skillDescription = "Cuts the enemy to attack, granting a random buff to the caster for 1 turn.",
+                    skillCooldown = 0,
+                    soulObtain = 1,
+                ),
+                Skill(
+                    skillName = "Analyze and Assess",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/rimuru/skill/2_analyze_and_assess.png",
+                    skillDescription = "After attacking with a non-basic skill, copies two buffs when the target is buffed, regardless of whether the attack hits and grants their effects to all allies. This effect is not applied to undispellable buffs. When an ally is attacked by a buffed enemy, activates Be Ready! against the attacker. Be Ready! can only be activated once every 3 turns.\n" +
+                            "Be Ready!: Quickly approaches the enemy and attacks, increasing Combat Readiness of the caster by 30%.",
+                    skillCooldown = 3,
+                    soulObtain = 0,
+                ),
+                Skill(
+                    skillName = "Devour It, Black Flame!",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/rimuru/skill/3_devour_it_black_flame.png",
+                    skillDescription = "Attacks the enemy with black flame, and a successful attack will inflict 5,000 additional fixed damage to the target. Fixed damage increases proportional to the number of buffs granted to all allies, up to a maximum of 10,000 fixed damage. When the target is buffed, decreases Defense of all enemies for 2 turns. Unaffected by elemental disadvantage.",
+                    skillCooldown = 5,
+                    soulObtain = 3,
+                )
+            )
+        ),Hero(
+            id = 9,
+            name = "Wandering Prince Cidd",
+            heroLore = "The fourteenth prince of a far, faraway kingdom. While traveling around the world and collecting interesting tales, Wandering Prince Cidd was taken hostage by pirates because he knew about the story related to the Jewel of the Sea. It's unclear whether the feeling of exhilaration in his heart stems from this precarious situation or the thrill of an exhilarating adventure.",
+            portraitImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/wandering_prince_cidd/portrait/wandering_prince_cidd.png",
+            profileImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/wandering_prince_cidd/profile/wandering_prince_cidd.png",
+            element = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ElementImages/light.png",
+            rarity = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroeRarityImages/4star.png",
+            classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/mage.png",
+            zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/pisces.png",
+            heroStats = Stats(attack=1021,defense=610,health=5474,speed=117),
+            isFavorite = false,
+            skills = listOf(
+                Skill(
+                    skillName = "Spiral Cut",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/wandering_prince_cidd/skill/1_spiral_cut.png",
+                    skillDescription = "Attacks the enemy with a machete, with a 65% chance to decrease Defense for 1 turn.",
+                    skillCooldown = 0,
+                    soulObtain = 1,
+                ),
+                Skill(
+                    skillName = "Natural Storyteller",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/wandering_prince_cidd/skill/2_natural_storyteller.png",
+                    skillDescription = "After an ally uses an attack that targets all enemies, activates Continuous Strike against the enemy with the highest Combat Readiness. Can only be activated once every 3 turns.\n" +
+                            "Continuous Strike: Attacks the enemy, decreasing Combat Readiness by 20%, and increases Combat Readiness of the ally with the highest Combat Readiness except for the caster by 20%.",
+                    skillCooldown = 3,
+                    soulObtain = 0,
+                ),
+                Skill(
+                    skillName = "Narrative Retcon",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/wandering_prince_cidd/skill/3_narrative_retcon.png",
+                    skillDescription = "Plants a bomb on all enemies and decreases Speed for 2 turns. At the end of the turn detonates bombs inflicted on the target.",
+                    skillCooldown = 5,
+                    soulObtain = 3,
+                )
+            )
+        ),Hero(
+            id = 10,
+            name = "Watcher Schuri",
+            heroLore = "A member of the Sicar assassin organization, Watcher Schuri is an outstanding fighter, but ignorant of the ways of the world. Though his rigid way of speaking gives off an air of unapproachability, he is surprisingly straightforward and open to granting people's requests. However, he hides a secret he cannot share with others.",
+            portraitImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/watcher_schuri/portrait/watcher_schuri.png",
+            profileImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/watcher_schuri/profile/watcher_schuri.png",
+            element = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ElementImages/light.png",
+            rarity = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroeRarityImages/4star.png",
+            classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/ranger.png",
+            zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/scorpio.png",
+            heroStats = Stats(attack=970,defense=557,health=5935,speed=106),
+            isFavorite = false,
+            skills = listOf(
+                Skill(
+                    skillName = "Sniper",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/watcher_schuri/skill/1_sniper.png",
+                    skillDescription = "Shoots the enemy with a rifle, with a 35% chance to target them for 2 turns.",
+                    skillCooldown = 0,
+                    soulObtain = 1,
+                ),
+                Skill(
+                    skillName = " Quickfire",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/watcher_schuri/skill/2_quickfire.png",
+                    skillDescription = "Shoots all enemies with a rifle, with a 75% chance to dispel one buff, and increases Speed of the caster for 2 turns. ",
+                    skillCooldown = 4,
+                    soulObtain = 0,
+                ),
+                Skill(
+                    skillName = "Finishing Shot",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/watcher_schuri/skill/3_finishing_shot.png",
+                    skillDescription = "Shoots a magic bullet at the enemy penetrating their Defense.",
+                    skillCooldown = 6,
+                    soulObtain = 3,
+                )
+            )
         ),
     )
 }
