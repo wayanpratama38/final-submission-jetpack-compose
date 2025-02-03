@@ -2,21 +2,20 @@ package com.example.epic7hero.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,18 +23,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.example.epic7hero.R
+
 
 
 @Composable
@@ -51,6 +51,8 @@ fun HeroCard(
     onFavoriteClick : (id: Long,newState : Boolean) -> Unit,
     modifier: Modifier = Modifier
 ){
+    val painter = rememberAsyncImagePainter(profileImage)
+    val state = painter.state
     Box(
         modifier = modifier
             .padding(8.dp)
@@ -64,15 +66,28 @@ fun HeroCard(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(8.dp)
         ) {
-            AsyncImage(
+            SubcomposeAsyncImage(
                 model = profileImage,
-                placeholder = painterResource(R.drawable.profile_image_placeholder),
                 contentDescription = stringResource(R.string.hero_profile_image),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .padding(8.dp)
                     .size(64.dp)
-                    .clip(CircleShape)
+                    .clip(CircleShape),
+                loading = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(64.dp),
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            trackColor = MaterialTheme.colorScheme.onSurface,
+                            strokeWidth = 1.dp,
+                        )
+                    }
+
+                }
             )
             Column(
                 modifier = Modifier
@@ -85,14 +100,27 @@ fun HeroCard(
                         .padding(bottom = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    AsyncImage(
+                    SubcomposeAsyncImage(
                         model = classes,
-                        placeholder = painterResource(R.drawable.classes_image_placeholder),
                         contentDescription = stringResource(R.string.hero_class),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(24.dp),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
+                        loading = {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(64.dp),
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    trackColor = MaterialTheme.colorScheme.onSurface,
+                                    strokeWidth = 1.dp,
+                                )
+                            }
+
+                        }
                     )
                     Text(
                         text = name,
@@ -105,30 +133,67 @@ fun HeroCard(
                 Row(
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    AsyncImage(
+                    SubcomposeAsyncImage(
                         model = element,
-                        placeholder = painterResource(R.drawable.element_image_placeholder),
                         contentDescription = "Hero Element",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(24.dp)
+                            .size(24.dp),
+                        loading = {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.fillMaxSize(),
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    trackColor = MaterialTheme.colorScheme.onSurface,
+                                    strokeWidth = 1.dp,
+                                )
+                            }
+                        }
                     )
-                    AsyncImage(
+
+                    SubcomposeAsyncImage(
                         model = zodiac,
-                        placeholder = painterResource(R.drawable.zodiac_image_placeholder),
                         contentDescription = "Hero Zodiac",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(24.dp),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
+                        loading = {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.fillMaxSize(),
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    trackColor = MaterialTheme.colorScheme.onSurface,
+                                    strokeWidth = 1.dp,
+                                )
+                            }
+                        }
                     )
-                    AsyncImage(
+                    SubcomposeAsyncImage(
                         model = rarity,
-                        placeholder = painterResource(R.drawable.rarity_image_placeholder),
                         contentDescription = "Hero Rarity",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(width = 91.dp, height = 21.dp)
+                            .size(width = 91.dp, height = 21.dp),
+                        loading = {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(24.dp),
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    trackColor = MaterialTheme.colorScheme.onSurface,
+                                    strokeWidth = 1.dp,
+                                )
+                            }
+                        }
                     )
                 }
             }

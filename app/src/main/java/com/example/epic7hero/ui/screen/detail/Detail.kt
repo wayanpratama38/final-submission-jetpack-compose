@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -25,6 +26,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -55,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.epic7hero.R
 import com.example.epic7hero.di.Injection
 import com.example.epic7hero.model.Skill
@@ -141,18 +144,37 @@ fun DetailContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ){
             // Portrait image dari hero
-            AsyncImage(
-                model = portraitImage,
-                contentScale = ContentScale.Fit,
-                contentDescription = name,
+            Box(
                 modifier = Modifier
-                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .parallaxLayoutModifier(scrollState, 15)
-            )
+                    .fillMaxWidth()
+                    .height(300.dp), // Beri tinggi tetap agar layout di bawahnya tidak bergeser
+                contentAlignment = Alignment.Center
+            ) {
+                SubcomposeAsyncImage(
+                    model = portraitImage,
+                    contentScale = ContentScale.Fit,
+                    contentDescription = name,
+                    modifier = Modifier
+                        .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                        .parallaxLayoutModifier(scrollState, 15),
+                    loading = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(64.dp),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                trackColor = MaterialTheme.colorScheme.onSurface,
+                                strokeWidth = 1.dp,
+                            )
+                        }
+                    }
+                )
+            }
 
             // Column utama dari detail
             Column (
@@ -267,11 +289,24 @@ fun HeroSkillUi(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.padding(8.dp)
         ) {
-            AsyncImage(
+            SubcomposeAsyncImage(
                 model = skillImage,
                 contentDescription = skillName,
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.size(width = 82.dp, height = 84.dp)
+                modifier = Modifier.size(width = 82.dp, height = 84.dp),
+                loading = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.fillMaxSize(),
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            trackColor = MaterialTheme.colorScheme.onSurface,
+                            strokeWidth = 1.dp,
+                        )
+                    }
+                }
             )
             Text(
                 text = skillName,
@@ -407,36 +442,88 @@ fun HeroInformationContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row{
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model = classes,
                     contentScale = ContentScale.Fit,
                     contentDescription = "Classes",
                     modifier = Modifier.size(24.dp),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary)
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary),
+                    loading = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.fillMaxSize(),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                trackColor = MaterialTheme.colorScheme.onSurface,
+                                strokeWidth = 1.dp,
+                            )
+                        }
+                    }
                 )
                 Text(text = name,
                     color = MaterialTheme.colorScheme.onSecondary,
                     style = MaterialTheme.typography.titleLarge)
             }
             Row{
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model = zodiac,
                     contentScale = ContentScale.Fit,
                     contentDescription = "Zodiac",
                     modifier = Modifier.size(24.dp),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary)
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary),
+                    loading = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.fillMaxSize(),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                trackColor = MaterialTheme.colorScheme.onSurface,
+                                strokeWidth = 1.dp,
+                            )
+                        }
+                    }
                 )
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model = element,
                     contentScale = ContentScale.Fit,
                     contentDescription = "Element",
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(24.dp),
+                    loading = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.fillMaxSize(),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                trackColor = MaterialTheme.colorScheme.onSurface,
+                                strokeWidth = 1.dp,
+                            )
+                        }
+                    }
                 )
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model = rarity,
                     contentScale = ContentScale.Fit,
                     contentDescription = "Rarity",
-                    modifier = Modifier.size(width = 91.dp, height = 21.dp)
+                    modifier = Modifier.size(width = 91.dp, height = 21.dp),
+                    loading = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.fillMaxSize(),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                trackColor = MaterialTheme.colorScheme.onSurface,
+                                strokeWidth = 1.dp,
+                            )
+                        }
+                    }
                 )
             }
         }
