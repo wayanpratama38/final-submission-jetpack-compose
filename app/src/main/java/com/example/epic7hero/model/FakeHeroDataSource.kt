@@ -110,7 +110,76 @@ object FakeHeroDataSource {
                     soulObtain = 3,
                 )
             )
+        ),Hero(
+            id = 4,
+            name = "Aria",
+            heroLore = "The leader of the Shadow Elves, a race that has cut all ties with the outside world and has chosen to live in Recluse's Forest. She is hard to read and gives off a cold impression, and is extremely hostile to everyone other than her people.",
+            portraitImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/aria/portrait/aria.png",
+            profileImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/aria/profile/aria.png",
+            element = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ElementImages/Ice-circle.png",
+            rarity = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroeRarityImages/5star.png",
+            classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/mage.png",
+            zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/taurus.png",
+            heroStats = Stats(attack=1039,defense=673,health=5299,speed=115),
+            isFavorite = false,
+            skills = listOf(
+                Skill(
+                    skillName = "Shadow Call",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/aria/skill/1_shadow_call.png",
+                    skillDescription = "Attacks two enemies with shadows, with a 40% chance to decrease Hit Chance for 1 turn. When it is not the caster's turn, increases effect chance by 20%. Damage dealt increases proportional to the caster's Defense.",
+                    skillCooldown = 0,
+                    soulObtain = 1,
+                ),
+                Skill(
+                    skillName = "Guide of Darkness",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/aria/skill/2_guide_of_darkness.png",
+                    skillDescription = "Increases Critical Hit Chance by 20%. After using a skill, when Focus is full, consumes all Focus to activate Dark Shadow Phantom.Dark Shadow Phantom: Attacks all enemies, dispelling two buffs and decreasing Combat Readiness by 30%. Damage dealt increases proportional to the caster's Defense.",
+                    skillCooldown = 0,
+                    soulObtain = 0,
+                ),
+                Skill(
+                    skillName = "The Umbral Hour",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/aria/skill/3_the_umbral_hour.png",
+                    skillDescription = "Using the power of the shadows, increases Defense of the caster and adopts a counterattacking stance for 2 turns. Grants stealth and a barrier to all allies except for the caster for 2 turns. Barrier strength increases proportional to the caster's Defense.",
+                    skillCooldown = 5,
+                    soulObtain = 3,
+                )
+            )
+        ),Hero(
+            id = 5,
+            name = "Immortal Wukong",
+            heroLore = "An Automatic Doll developed in Politia. Though virtually indestructible, this model can be neutralized through a program called GINGOA. He was initially sealed away for some time after being deemed too risky for missions. However, he was later reactivated for a mission as he was the most suitable candidate.",
+            portraitImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/immortal_wukong/portrait/immortal_wukong.png",
+            profileImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/immortal_wukong/profile/immortal_wukong.png",
+            element = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ElementImages/Earth-circle.png",
+            rarity = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroeRarityImages/5star.png",
+            classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/warrior.png",
+            zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/scorpio.png",
+            heroStats = Stats(attack=1208,defense=616,health=6488,speed=102),
+            isFavorite = false,
+            skills = listOf(
+                Skill(
+                    skillName = "Swing",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/immortal_wukong/skill/1_swing.png",
+                    skillDescription = "Attacks the enemy with Ruyi Bang, and grants a barrier to the caster for 1 turn. Barrier strength increases proportional to the caster's Attack. When used on the caster's turn, attacks all enemies. The changed attack does not trigger a Dual Attack.",
+                    skillCooldown = 0,
+                    soulObtain = 1,
+                ),
+                Skill(
+                    skillName = "The Immortal One",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/immortal_wukong/skill/2_the_immortal_one.png",
+                    skillDescription = "Increases Critical Hit Resistance and Penetration Resistance by 35%. When attacked, if the caster suffers a non-critical hit, increases Attack and Speed by 20%. Can stack up to 3 times.",
+                    skillCooldown = 0,
+                    soulObtain = 0,
+                ),
+                Skill(
+                    skillName = "Heavenly Fighter's Strike",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/immortal_wukong/skill/3_heavenly_fighters_strike.png",
+                    skillDescription = "Increases Attack of the caster for 2 turns, before attacking the enemy and stunning for 1 turn. When the caster's Attack is greater than the target's Attack, damage dealt increases proportional to the difference, up to a maximum of 70%. Unaffected by elemental disadvantage.",
+                    skillCooldown = 4,
+                    soulObtain = 2,
+                )
+            )
         ),
-
     )
 }

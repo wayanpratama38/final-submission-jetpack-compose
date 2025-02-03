@@ -146,10 +146,11 @@ fun DetailContent(
             // Portrait image dari hero
             AsyncImage(
                 model = portraitImage,
-                contentScale = ContentScale.Fit,
-                contentDescription = null,
+                contentScale = ContentScale.None,
+                contentDescription = name,
                 modifier = Modifier
                     .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                    .align(Alignment.CenterHorizontally)
                     .parallaxLayoutModifier(scrollState, 15)
             )
 
