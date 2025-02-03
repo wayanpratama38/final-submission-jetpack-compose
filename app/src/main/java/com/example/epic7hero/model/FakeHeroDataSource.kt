@@ -1,8 +1,5 @@
 package com.example.epic7hero.model
 
-import androidx.compose.ui.res.integerResource
-import com.example.epic7hero.R
-
 object FakeHeroDataSource {
     val heroData = listOf(
         Hero(

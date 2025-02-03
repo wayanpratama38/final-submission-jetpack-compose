@@ -6,9 +6,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 
@@ -16,7 +13,7 @@ class HeroRepository {
 
 
     private val _heroesData = MutableStateFlow<List<Hero>>(emptyList())
-    val heroesData : StateFlow<List<Hero>> = _heroesData.asStateFlow()
+    private val heroesData : StateFlow<List<Hero>> = _heroesData.asStateFlow()
 
     init{
         if(_heroesData.value.isEmpty()){

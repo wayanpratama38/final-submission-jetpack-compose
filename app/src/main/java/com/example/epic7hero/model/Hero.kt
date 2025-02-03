@@ -1,6 +1,5 @@
 package com.example.epic7hero.model
 
-import androidx.compose.ui.graphics.vector.ImageVector
 
 data class Hero(
     val id : Long,
