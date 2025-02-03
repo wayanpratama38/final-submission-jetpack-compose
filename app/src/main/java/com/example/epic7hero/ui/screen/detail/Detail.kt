@@ -302,7 +302,7 @@ fun HeroSkillUi(
                 Row(
                     modifier = Modifier.fillMaxWidth()
                 ){
-                    Text(text = "Cooldown : $skillCooldown",
+                    Text(text = "Cooldown : $skillCooldown Turn",
                         modifier = Modifier.weight(3f),
                         textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.bodyMedium

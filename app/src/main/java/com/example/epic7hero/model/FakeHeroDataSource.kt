@@ -180,6 +180,42 @@ object FakeHeroDataSource {
                     soulObtain = 2,
                 )
             )
+        ),Hero(
+            id = 6,
+            name = "Kane",
+            heroLore = "Kane, an illegitimate child of the Drake family, was abandoned shortly after his birth. As a result, he grew up surrounded by violence, destruction, betrayal, and fierce competition from a young age. He had been oblivious to his true identity, as his thirst for blood and vampiric abilities manifested comparatively late in his life. It wasn't until a life-threatening encounter with the Vampire Slayers that he experienced an awakening and learned about his true nature.",
+            portraitImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/kane/portrait/kane.png",
+            profileImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/kane/profile/kane.png",
+            element = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ElementImages/Fire-circle.png",
+            rarity = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroeRarityImages/5star.png",
+            classes = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/JobImages/warrior.png",
+            zodiac = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/ZodiacImages/leo.png",
+            heroStats = Stats(attack=1359,defense=585,health=5542,speed=105),
+            isFavorite = false,
+            skills = listOf(
+                Skill(
+                    skillName = "Hammer Time",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/kane/skill/1_hammer_time.png",
+                    skillDescription = "Attacks the enemy with a hammer, and increases Combat Readiness of the caster by 15%. When the caster is enraged, activates Rock Smash as an extra attack. Rock Smash can only be activated once per turn, during the caster’s turn.\n" +
+                            "Rock Smash: Attacks all enemies by slamming the ground, and inflicts bleeding for 2 turns. Ignores Effect Resistance.",
+                    skillCooldown = 0,
+                    soulObtain = 1,
+                ),
+                Skill(
+                    skillName = "Force Awakening",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/kane/skill/2_force_awakening.png",
+                    skillDescription = "Upon receiving lethal damage, grants immortality and vampirism for 1 turn and resets skill cooldown of Feast of Predation. Can be only activated once every 9 turns. After an ally attacks, if the target has a debuff, gains 10 Fighting Spirit and when Fighting Spirit is full, consumes all Fighting Spirit to make the caster enraged for 2 turns.",
+                    skillCooldown = 9,
+                    soulObtain = 0,
+                ),
+                Skill(
+                    skillName = "Feast of Predation",
+                    skillImage = "https://raw.githubusercontent.com/wayanpratama38/e7-heroes/main/asset/HeroImages/kane/skill/3_feast_of_predation.png",
+                    skillDescription = "Attacks the enemy by unleashing their power, and grants increased Attack (Greater) to the caster for 2 turns. Damage dealt increases proportional to the number of debuffs inflicted on the target.",
+                    skillCooldown = 4,
+                    soulObtain = 3,
+                )
+            )
         ),
     )
 }
