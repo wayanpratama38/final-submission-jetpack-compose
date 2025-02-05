@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
@@ -51,7 +52,8 @@ fun ExpandableCard(
                     durationMillis = 300,
                     easing = LinearOutSlowInEasing
                 )
-            ),
+            )
+            .testTag("expandableCard"),
         shape = RoundedCornerShape(5.dp),
         onClick = {
             expandableState = !expandableState

@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="searchIncorrectName()">
+      <SelectionState runConfigName="checkAllHeroInformation()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="clickFavorite_NavigateFavoriteScreen()">
+      <SelectionState runConfigName="checkAllHeroStatus()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="clickFavorite_NavigateFavoriteScreen_DeleteFavoriteStatus()">
+      <SelectionState runConfigName="checkHeroLore()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="profileScreenCheck()">
+      <SelectionState runConfigName="checkHeroSkill()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="checkHomeScreenToDetailScreenCorrectness()">
+      <SelectionState runConfigName="checkBackButtonScrollDownAndScrollToTopButton()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

@@ -16,4 +16,9 @@
     <string name="back">Back</string>
     <string name="full_name">I Wayan Satya Widhya Putra Pratama</string>
     <string name="gmail">wayanpratama38@gmail.com</string>
+    <string name="attack">Attack</string>
+    <string name="health">Health</string>
+    <string name="defense">Defense</string>
+    <string name="speed">Speed</string>
+    <string name="skills">Skills</string>
 </resources>

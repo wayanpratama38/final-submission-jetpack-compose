@@ -46,6 +46,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -135,13 +136,15 @@ fun DetailContent(
     }
 
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize(),
         contentAlignment = Alignment.TopCenter
     ){
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .verticalScroll(scrollState),
+                .verticalScroll(scrollState)
+                .testTag("screenScroll"),
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
             // Portrait image dari hero
@@ -209,6 +212,7 @@ fun DetailContent(
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.TopStart)
+                .testTag("backButton")
         ) {
             IconButton(
                 onClick = { navigateBack() }) {
@@ -235,6 +239,7 @@ fun DetailContent(
             modifier = Modifier
                 .padding(bottom = 30.dp)
                 .align(Alignment.BottomCenter)
+                .testTag("scrollToTopButton")
         ) {
             ScrollToTopButton(
                 onClick = {
@@ -252,7 +257,7 @@ fun HeroSkillsInvoke(
     skills: List<Skill>
 ){
     ExpandableCard(
-        title = "Skills"
+        title = stringResource(R.string.skills)
     ) {
         skills.forEach { skill ->
             HeroSkillUi(
@@ -371,7 +376,12 @@ fun HeroStatInvoke(
         R.drawable.defense,
         R.drawable.speed
     )
-    val statNames = listOf("Attack","Health","Defense","Speed")
+    val statNames = listOf(
+        stringResource(R.string.attack),
+        stringResource(R.string.health),
+        stringResource(R.string.defense),
+        stringResource(R.string.speed)
+    )
     val statValues = listOf(stats.attack,stats.health,stats.defense,stats.speed)
 
     Text(text = stringResource(R.string.status),
