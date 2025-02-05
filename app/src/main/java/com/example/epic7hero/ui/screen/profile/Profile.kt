@@ -16,7 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.epic7hero.R
@@ -26,7 +28,9 @@ fun Profile(
     modifier : Modifier = Modifier
 ){
     Box(
-        modifier = modifier.fillMaxSize().padding(8.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(8.dp),
         contentAlignment = Alignment.Center
     ){
         Column(
@@ -40,17 +44,22 @@ fun Profile(
                 modifier = Modifier
                     .size(200.dp)
                     .clip(CircleShape)
+                    .testTag("photoProfile")
             )
 
-            Text(text = "I Wayan Satya Widhya Putra Pratama",
+            Text(text = stringResource(R.string.full_name),
                 style = MaterialTheme.typography.titleLarge,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis)
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.testTag("fullName")
+            )
 
-            Text(text = "wayanpratama38@gmail.com",
+            Text(text = stringResource(R.string.gmail),
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis)
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.testTag("dicodingGmail")
+            )
         }
 
     }

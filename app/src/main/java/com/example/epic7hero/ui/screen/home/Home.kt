@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
@@ -88,7 +89,8 @@ fun HomeContent(
             )
         }else{
             Box(
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier.fillMaxSize()
+                    .testTag("emptySearch"),
                 contentAlignment = Alignment.Center
             ){
                 Text(
@@ -110,7 +112,7 @@ fun HeroesCard(
     modifier : Modifier = Modifier
 ){
     LazyColumn(
-        modifier = modifier
+        modifier = modifier.testTag("lazyColumn")
     ) {
         items(heroes,key= {it.id}){ data->
             HeroCard(

@@ -101,6 +101,7 @@ fun BottomBar(
 }
 
 
+// Composable utama
 @Composable
 fun EpicSevenApp(
     modifier : Modifier = Modifier,

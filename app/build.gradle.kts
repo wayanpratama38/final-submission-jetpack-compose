@@ -16,6 +16,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Tambahkan ini untuk men-disable animasi
+        testInstrumentationRunnerArguments += mapOf(
+            "disableAnimation" to "true"
+        )
     }
 
     buildTypes {
@@ -37,6 +41,7 @@ android {
     buildFeatures {
         compose = true
     }
+
 }
 
 dependencies {
@@ -62,4 +67,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Load Data With Kotlin Coroutine in Compose
     implementation(libs.coil.compose)
+    // Navigation Testing Dependency untuk testing
+    androidTestImplementation(libs.androidx.navigation.testing)
+    // Android monitor untuk debug
+    debugImplementation(libs.androidx.monitor)
+    debugImplementation(libs.androidx.core)
 }

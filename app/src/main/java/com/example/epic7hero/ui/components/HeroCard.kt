@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
@@ -53,7 +54,8 @@ fun HeroCard(
             .padding(8.dp)
             .clip(RoundedCornerShape(15.dp))
             .wrapContentSize()
-            .background(MaterialTheme.colorScheme.primary),
+            .background(MaterialTheme.colorScheme.primary)
+            .testTag("heroCard"),
         contentAlignment = Alignment.CenterStart,
 
     ){
@@ -205,6 +207,7 @@ fun HeroCard(
                     .align(Alignment.CenterVertically)
                     .padding(end = 8.dp)
                     .clip(CircleShape)
+                    .testTag("favoriteButton")
             )
 
         }
