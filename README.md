@@ -1,6 +1,8 @@
 
 # Jetpack Compose Final Submission
-*Repository* ini merupakan tempat saya menyimpan *progress* dalam mengerjakan *submission* akhir untuk *final submission* kelas Dicoding. Submission ini berhasil mendapatkan **5![Star](https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/StarredRepositoryYellow.svg)**.
+*Repository* ini merupakan tempat saya menyimpan *progress* dalam mengerjakan *submission* akhir untuk *final submission* kelas Dicoding.
+<br> 
+Submission ini berhasil mendapatkan **5![Star](https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/StarredRepositoryYellow.svg)** dalam penilaiannya sehingga cocok dijadikan sebagai bahan pembelajaran dalam proses pembuatan *submission* aplikasi android dengan **Jetpack Compose**.
 <br>
 **Berikut ini _preview_ dari aplikasi ini** 
 | Home Screen  | Search Feature | Favorite Screen | Detail Screen | Profile Screen |
