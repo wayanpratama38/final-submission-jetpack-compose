@@ -67,8 +67,7 @@ fun FavoriteContent(
             )
         }else{
             Box(
-                modifier = modifier.fillMaxSize().
-                testTag("emptyFavorite"),
+                modifier = modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ){
                 Text(

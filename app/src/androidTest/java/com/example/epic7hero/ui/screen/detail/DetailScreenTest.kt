@@ -1,17 +1,12 @@
 package com.example.epic7hero.ui.screen.detail
 
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.semantics.SemanticsActions
-import androidx.compose.ui.semantics.SemanticsNode
-import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
-import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.swipeUp
 import com.example.epic7hero.R
 import com.example.epic7hero.model.Hero
@@ -19,7 +14,6 @@ import com.example.epic7hero.model.Skill
 import com.example.epic7hero.model.Stats
 import com.example.epic7hero.onNodeWithStringId
 import com.example.epic7hero.ui.theme.Epic7HeroTheme
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

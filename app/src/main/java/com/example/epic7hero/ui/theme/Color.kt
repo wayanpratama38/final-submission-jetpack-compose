@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.example.epic7hero.ui.theme
 
 import androidx.compose.ui.graphics.Color

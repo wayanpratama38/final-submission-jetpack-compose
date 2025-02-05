@@ -1,6 +1,5 @@
 package com.example.epic7hero.ui.screen.home
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,6 @@ import com.example.epic7hero.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: HeroRepository):ViewModel() {

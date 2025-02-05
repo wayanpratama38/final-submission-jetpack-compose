@@ -1,13 +1,10 @@
 package com.example.epic7hero.ui.screen.favorite
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.epic7hero.data.HeroRepository
 import com.example.epic7hero.model.Hero
 import com.example.epic7hero.ui.common.UiState
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

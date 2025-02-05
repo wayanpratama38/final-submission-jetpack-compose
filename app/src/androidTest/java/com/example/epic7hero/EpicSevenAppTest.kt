@@ -83,7 +83,7 @@ class EpicSevenAppTest {
 
 
     @Test
-    // Klik tombol favorite dan navigasi ke favorite screen
+    // Klik tombol favorite dan navigasi ke favorite screen kemudian delete dan cek apakah ada informasi tentang hero favorite kosong
     fun clickFavoriteNavigateFavoriteScreen(){
         composeTestRule.onNodeWithTag("lazyColumn").performScrollToIndex(1)
         composeTestRule.onNodeWithText(FakeHeroDataSource.heroData[1].name).assertIsDisplayed()
@@ -91,20 +91,10 @@ class EpicSevenAppTest {
         composeTestRule.onNodeWithStringId(R.string.favorite_bottom_name).performClick()
         navController.assertCurrentRouteName(Screen.Favorite.route)
         composeTestRule.onNodeWithText(FakeHeroDataSource.heroData[1].name).assertIsDisplayed()
+        composeTestRule.onAllNodesWithTag("favoriteButton").onFirst().performClick()
+        composeTestRule.onNodeWithStringId(R.string.no_favorite_hero).assertIsDisplayed()
     }
 
-    @Test
-    // Tambah hero ke favorite, kemudian ke favorite screen lalu hapus dan cek apakah kosong atau tidak
-    fun clickFavoriteNavigateFavoriteScreenDeleteFavoriteStatus(){
-        composeTestRule.onNodeWithTag("lazyColumn").performScrollToIndex(1)
-        composeTestRule.onNodeWithText(FakeHeroDataSource.heroData[1].name).assertIsDisplayed()
-        composeTestRule.onAllNodesWithTag("favoriteButton").onFirst().performClick()
-        composeTestRule.onNodeWithStringId(R.string.favorite_bottom_name).performClick()
-        navController.assertCurrentRouteName(Screen.Favorite.route)
-        composeTestRule.onNodeWithText(FakeHeroDataSource.heroData[1].name).assertIsDisplayed()
-        composeTestRule.onAllNodesWithTag("favoriteButton").onFirst().performClick()
-        composeTestRule.onNodeWithTag("emptyFavorite").assertIsDisplayed()
-    }
 
     @Test
     // Cek profile screen apakah ada foto, nama dan Email
